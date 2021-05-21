@@ -1,9 +1,0 @@
-.Board-status {
-    margin-bottom: 10px;
-}
-
-.Board-row:after {
-    clear: both;
-    content: "";
-    display: table;
-}

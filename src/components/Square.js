@@ -1,4 +1,3 @@
-import './Square.css';
 
 /** Square Component is a presentational component
  * 
@@ -8,15 +7,20 @@ import './Square.css';
  * 
  *  Board -> Square
  */
-function Square({ value, updateBoardFn }){
+function Square({value, playMove}){
+  const style = {
+    background: 'lightblue',
+    border: '2px solid darkblue',
+    fontSize: '30px',
+    fontWeight: '800',
+    cursor: 'pointer',
+    outline: 'none'
+  };
+
   return (
-    <td
-      className="Square"
-      onClick={updateBoardFn}
-      role="button"
-    >
+    <button style={style} onClick={playMove}>
       {value}
-    </td>
+    </button>
   )
 }
 

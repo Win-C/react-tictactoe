@@ -1,4 +1,4 @@
-import Game from './Game';
+import Game from './components/Game';
 import './App.css';
 
 /** App Component

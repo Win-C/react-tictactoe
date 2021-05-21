@@ -15,8 +15,8 @@ function Game(){
   function handleClick(i){
     const boardCopy = [...board];
 
-    // If user click an occupied square or if game is won then do nothing
-    if(winner || boardCopy[i]) return;
+    // If user click an occupied square or if game is won or tie then do nothing
+    if(winner || isTie || boardCopy[i]) return;
 
     // Put an X or an O in the clicked square
     boardCopy[i] = xIsNext ? "X" : "O"; 

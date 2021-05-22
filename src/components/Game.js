@@ -10,7 +10,7 @@ function Game(){
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
   const winner = calculateWinner(board);
-  const isTie = !winner && board.every(square => square !== null);
+  const isTie = board.every(square => square !== null);
 
   function handleClick(i){
     const boardCopy = [...board];
@@ -25,9 +25,9 @@ function Game(){
     setXisNext(!xIsNext);
   }
 
-  // function jumpTo(){
-
-  // }
+  function jumpTo(){
+    
+  }
 
   function renderMoves(){
     return ( winner || isTie

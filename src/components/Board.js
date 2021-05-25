@@ -15,9 +15,9 @@ import Square from './Square';
  */
 function Board({squares, playMove}) {
   const style = {
-    border: '4px solid darkblue',
+    border: '5px solid darkblue',
     borderRadius: '10px',
-    width: '250px',
+    width: '245px',
     height: '250px',
     margin: '0 auto',
     display: 'grid',

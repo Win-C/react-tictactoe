@@ -17,7 +17,7 @@ function Board({squares, playMove}) {
   const style = {
     border: '5px solid darkblue',
     borderRadius: '10px',
-    width: '245px',
+    width: '250px',
     height: '250px',
     margin: '0 auto',
     display: 'grid',

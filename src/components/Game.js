@@ -7,35 +7,44 @@ import Board from './Board';
  *  App -> Game -> { Board, Message }
  */
 function Game(){
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXisNext] = useState(true);
-  const winner = calculateWinner(board);
-  const isTie = board.every(square => square !== null);
+  const winner = calculateWinner(history[stepNumber]);
+  const isTie = history[stepNumber].every(square => square !== null);
 
   function handleClick(i){
-    const boardCopy = [...board];
+    const timeInHistory = history.slice(0, stepNumber + 1);
+    const current = timeInHistory[stepNumber];
+    const squares = [...current];
 
     // If user click an occupied square or if game is won or tie then do nothing
-    if(winner || isTie || boardCopy[i]) return;
+    if(winner || isTie || squares[i]) return;
 
     // Put an X or an O in the clicked square
-    boardCopy[i] = xIsNext ? "X" : "O"; 
+    squares[i] = xIsNext ? "X" : "O"; 
 
-    setBoard(boardCopy);
+    setHistory([...timeInHistory, squares]);
+    setStepNumber(timeInHistory.length);
     setXisNext(!xIsNext);
   }
 
-  function jumpTo(){
-    
+  function jumpTo(step){
+    setStepNumber(step);
+    setXisNext(step % 2 === 0);
   }
 
   function renderMoves(){
-    return ( winner || isTie
-        ? <button onClick={() => setBoard(Array(9).fill(null))}>
-            Restart Game
+    return history.map((_step, move) => {
+      const destination = move ? `Go to move #${move}` : 'Go to start';
+      return (
+        <li key={move}>
+          <button onClick={() => jumpTo(move)}>
+              {destination}
           </button>
-        : null
-    )
+        </li>
+      )
+    })
   }
 
   const styles = {
@@ -45,7 +54,7 @@ function Game(){
 
   return (
     <>
-      <Board squares={board} playMove={handleClick} />
+      <Board squares={history[stepNumber]} playMove={handleClick} />
       <div style={styles}>
         <p>
           {winner ? 'Winner: ' + winner : (isTie ? "It's a tie!": null)}
